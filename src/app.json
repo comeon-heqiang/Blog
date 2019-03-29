@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/classify/main",
+    "pages/me/main",
+    "pages/detail/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "博客",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "backgroundColor": "#fafafa",
+    "selectedColor": "#333",
+    "borderStyle": "white",
+    "list": [{
+      "text": "首页",
+      "pagePath": "pages/index/main",
+      "iconPath": "static/tabs/index.png",
+      "selectedIconPath": "static/tabs/index.png"
+    }, {
+      "text": "分类",
+      "pagePath": "pages/classify/main",
+      "iconPath": "static/tabs/classify.png",
+      "selectedIconPath": "static/tabs/classify.png"
+    },{
+      "text": "我",
+      "pagePath": "pages/me/main",
+      "iconPath": "static/tabs/me.png",
+      "selectedIconPath": "static/tabs/me.png"
+    }],
+    "position": "bottom"
+  }
+}
