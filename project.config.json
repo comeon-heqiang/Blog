@@ -29,13 +29,26 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
 					"name": "文章页",
 					"pathName": "pages/detail/main",
 					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我",
+					"pathName": "pages/me/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "分类",
+					"pathName": "pages/classify/main",
 					"scene": null
 				}
 			]

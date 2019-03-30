@@ -1,5 +1,47 @@
-view{
+// view {
+//   font-size: 14px;
+//   line-height: 1.6;
+// }
+page{
   font-size: 14px;
-  color: #666;
-  line-height: 1.6;
+  color: #909399;
 }
+
+$--color-white:#ffffff !default;
+$--color-primary: #409EFF !default;
+$--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default;
+/* 53a8ff */
+$--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default;
+/* 66b1ff */
+$--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default;
+/* 79bbff */
+$--color-primary-light-4: mix($--color-white, $--color-primary, 40%) !default;
+/* 8cc5ff */
+$--color-primary-light-5: mix($--color-white, $--color-primary, 50%) !default;
+/* a0cfff */
+$--color-primary-light-6: mix($--color-white, $--color-primary, 60%) !default;
+/* b3d8ff */
+$--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default;
+/* c6e2ff */
+$--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default;
+/* d9ecff */
+$--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default;
+/* ecf5ff */
+
+$--color-success: #67c23a !default;
+$--color-warning: #e6a23c !default;
+$--color-danger: #f56c6c !default;
+$--color-info: #909399 !default;
+
+// 文字颜色
+$--text-color-1:#303133;
+$--text-color-2:#606266;
+$--text-color-3:#909399;
+$--text-color-4:#C0C4CC;
+
+//边框颜色
+$--border-color-1:#DCDFE6;
+$--border-color-2:#E4E7ED;
+$--border-color-3:#EBEEF5;
+$--border-color-4:#F2F6FC;
+$--border-color-5:#f7f7f7;

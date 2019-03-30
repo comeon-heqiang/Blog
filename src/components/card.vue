@@ -4,39 +4,49 @@
     <div class="card-header">
       <div class="author">
         <img
-          :src="cardData.authorPic"
+          :src="data.authorPic"
           alt=""
         >
-        {{cardData.author}}
+        {{data.author}}
       </div>
     </div>
     <div class="card-main">
       <p>
-        {{cardData.content}}
+        {{data.content}}
       </p>
       <div class="img-list">
         <img
-          :src="cardData.contentPic"
+          :src="data.contentPic"
           alt=""
           mode="widthFix"
         >
       </div>
     </div>
     <div class="card-footer">
+      <!-- 点赞数 -->
       <div
         class="heart"
         @click="handleHeart"
         :class="{'heart-on':isLike}"
       >
       </div>
-      <div class="like" :class="{'like-on':isLike}">
-        {{cardData.like}}
+      <div
+        class="like"
+        :class="{'like-on':isLike}"
+      >
+        {{data.like}}
       </div>
+
       <div class="init">
-        {{cardData.init}}
+        {{data.init}}
       </div>
+      <!-- 发布时间 -->
       <div class="date">
-        {{cardData.date}}
+        <img
+          src="../../static/images/icon-date.png"
+          alt=""
+        >
+        {{data.date}}
       </div>
     </div>
   </div>
@@ -44,14 +54,14 @@
 
 <script>
 export default {
-  props: ['cardData'],
+  props: ['data'],
   data () {
     return {
       isLike: false
     }
   },
   mounted () {
-    console.log(this.cardData)
+    // console.log(this.data)
   },
   methods: {
     handleHeart () {
@@ -63,7 +73,9 @@ export default {
 
 <style scope lang="scss">
 .card {
-  margin-top: 35px;
+  margin-bottom: 15px;
+  padding: 15px;
+  background: #fff;
   .card-header {
     .author {
       display: flex;
@@ -89,12 +101,17 @@ export default {
     position: relative;
     padding-left: 30px;
     display: flex;
+    color: #bababa;
+    & > div {
+      color: $--text-color-3;
+      margin-right: 10px;
+    }
     .heart {
       height: 67px;
       width: 67px;
       position: absolute;
       left: -21px;
-      top: -24px;
+      top: -23px;
       background: url("http://www.17sucai.com/preview/11/2016-02-16/%E5%96%9C%E6%AC%A2/images/web_heart_animation.png");
       background-position: left;
       background-repeat: no-repeat;
@@ -108,9 +125,18 @@ export default {
         background-position: right;
       }
     }
-    .like{
-      &.like-on{
+    .like {
+      &.like-on {
         color: #e2264d;
+      }
+    }
+    .date {
+      display: flex;
+      align-items: center;
+      img {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
       }
     }
   }

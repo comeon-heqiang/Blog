@@ -6,6 +6,13 @@ var mpvueInfo = require('../node_modules/mpvue/package.json')
 var packageInfo = require('../package.json')
 var mkdirp = require('mkdirp')
 
+
+// 全局文件引入 当然只想编译一个文件的话可以省去这个函数
+function resolveResource(name) {
+  return path.resolve(__dirname, '../src/assets/scss/' + name);
+}
+
+
 exports.assetsPath = function (_path) {
   var assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
@@ -50,6 +57,7 @@ exports.cssLoaders = function (options) {
         })
       })
     }
+  
 
     // Extract CSS when that option is specified
     // (which is the case during production build)
@@ -62,15 +70,37 @@ exports.cssLoaders = function (options) {
       return ['vue-style-loader'].concat(loaders)
     }
   }
-
+  function generateSassResourceLoader() {
+    var loaders = [
+      cssLoader,
+      'sass-loader',
+      {
+        loader: 'sass-resources-loader',
+        options: {
+          // 多个文件时用数组的形式传入，单个文件时可以直接使用 path.resolve(__dirname, '../static/style/common.scss'
+          resources: [resolveResource('public.scss')]  
+        }
+      }
+      ];
+      if (options.extract) {
+        return ExtractTextPlugin.extract({
+          use: loaders,
+          fallback: 'vue-style-loader'
+        })
+      } else {
+        return ['vue-style-loader'].concat(loaders)
+      }
+    }
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
   return {
     css: generateLoaders(),
     wxss: generateLoaders(),
     postcss: generateLoaders(),
     less: generateLoaders('less'),
-    sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
+    // sass: generateLoaders('sass', { indentedSyntax: true }),
+    // scss: generateLoaders('sass'),
+    sass: generateSassResourceLoader(),
+    scss: generateSassResourceLoader(),
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus')
   }
