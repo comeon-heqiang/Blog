@@ -4,21 +4,23 @@
 
       <!-- 头像 -->
       <div class="header">
-        <!-- <img
-          src="../../../static/images/icons/icon-hat.png"
-          alt=""
-          class="icon-hat"
-        > -->
         <img
           :src="user.pic"
           alt=""
           class="user-pic"
         >
       </div>
+      <!-- 未登录状态 -->
+      <button
+        open-type="getUserInfo"
+        @getuserinfo="getUserInfo"
+        v-if="!user.nickName"
+        class="btn-login"
+      >点击登录</button>
+      <!-- <div @click="getUserInfo" v-if="!user.nickName">登录</div> -->
       <!-- 昵称 -->
       <div class="name">
         {{user.nickName}}
-
       </div>
       <!-- 签名 -->
       <div class="signature">
@@ -44,7 +46,11 @@
 
     </div>
     <div class="main">
-      <card v-for="item in myData" :key="item.id" :data="item"></card>
+      <card
+        v-for="item in myData"
+        :key="item.id"
+        :data="item"
+      ></card>
     </div>
   </div>
 </template>
@@ -58,8 +64,8 @@ export default {
       activeIndex: 0,
       user: {
         id: 1,
-        nickName: '时光不染',
-        pic: require('../../../static/images/user1.jpg'),
+        nickName: '',
+        pic: require('../../../static/images/icons/user.png'),
         signature: '浮生若梦，为欢几何',
         gender: 0,
         birthDay: '2019/3/30',
@@ -108,7 +114,12 @@ export default {
     }
   },
   created () {
+    if (!wx.getStorageSync('LoginSessionKey')) {
 
+    }
+    else {
+
+    }
   },
   mounted () {
     wx.setNavigationBarTitle({
@@ -122,6 +133,32 @@ export default {
     // 分类点击
     handleClassify (index) {
       this.activeIndex = index;
+    },
+    getUserInfo (e) {
+      let _this = this;
+      let userInfo = e.mp.detail.userInfo;
+      console.log(e)
+      if (!userInfo) {
+        return
+      }
+      this.user.nickName = userInfo.nickName
+      this.user.pic = userInfo.avatarUrl
+      // 取的用户openid
+      wx.login({
+        success: function (res) {
+          if (res.code) {
+            _this.$_POST(_this.$_url.login, { code: res.code, type: 'wxapp' }).then(response => {
+              let res = response.data;
+              wx.setStorage({
+                key: 'skey',
+                data: res.skey
+              })
+            })
+          } else {
+            console.log(res.errMsg)
+          }
+        }
+      })
     }
   },
 
@@ -202,5 +239,11 @@ export default {
       }
     }
   }
+}
+.btn-login {
+  background: none;
+  color: #fff;
+  font-size: 15px;
+  border: 0;
 }
 </style>

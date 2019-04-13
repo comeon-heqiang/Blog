@@ -1,11 +1,12 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": false,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"autoAudits": false
 	},
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
@@ -29,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -49,6 +50,13 @@
 					"id": -1,
 					"name": "分类",
 					"pathName": "pages/classify/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "添加文章",
+					"pathName": "pages/addArticle/main",
 					"scene": null
 				}
 			]

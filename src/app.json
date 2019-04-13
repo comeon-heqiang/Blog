@@ -3,7 +3,9 @@
     "pages/index/main",
     "pages/classify/main",
     "pages/me/main",
-    "pages/detail/main"
+    "pages/detail/main",
+    "pages/addArticle/main",
+    "pages/classifyDetail/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -26,7 +28,12 @@
       "pagePath": "pages/classify/main",
       "iconPath": "static/tabs/classify.png",
       "selectedIconPath": "static/tabs/classify.png"
-    },{
+    }, {
+      "text": "添加",
+      "pagePath": "pages/addArticle/main",
+      "iconPath": "static/tabs/jilu.png",
+      "selectedIconPath": "static/tabs/jilu.png"
+    }, {
       "text": "我",
       "pagePath": "pages/me/main",
       "iconPath": "static/tabs/me.png",
