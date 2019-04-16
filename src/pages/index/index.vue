@@ -45,25 +45,25 @@ export default {
         {
           id: 1,
           title: "标题1",
-          src: require("../../../static/images/banner/banner1.jpg"),
+          src: 'http://localhost:3000/banner/banner1.jpg',
           link: ""
         },
         {
           id: 2,
           title: "标题2",
-          src: require("../../../static/images/banner/banner2.jpg"),
+          src: 'http://localhost:3000/banner/banner2.jpg',
           link: ""
         },
         {
           id: 3,
           title: "标题3",
-          src: require("../../../static/images/banner/banner3.jpg"),
+          src: 'http://localhost:3000/banner/banner3.jpg',
           link: ""
         },
         {
           id: 4,
           title: "标题4",
-          src: require("../../../static/images/banner/banner4.jpg"),
+          src: 'http://localhost:3000/banner/banner4.jpg',
           link: ""
         },
       ],
@@ -95,6 +95,7 @@ export default {
       ]
     }
   },
+  
   components: {
     indexBanner,
     Card

@@ -62,6 +62,7 @@ export default {
     return {
       classify: ['我的动态', '我的好友', '我的商店'],
       activeIndex: 0,
+      loginCode: '',
       user: {
         id: 1,
         nickName: '',
@@ -113,13 +114,23 @@ export default {
       ]
     }
   },
+  onLaunch () {
+    let getSkey = wx.getStorageSync('LoginSessionKey')
+    // 判断是否存在SessionKey
+    if (getSkey) {
+      // 判断sKey是否过期
+      wx.checkSession({
+        success: function () {
+        },
+        fail: function () {
+          this.wx_login()
+        },
+      })
+    } else {
+      this.wx_login()
+    }
+  },
   created () {
-    if (!wx.getStorageSync('LoginSessionKey')) {
-
-    }
-    else {
-
-    }
   },
   mounted () {
     wx.setNavigationBarTitle({
@@ -134,30 +145,54 @@ export default {
     handleClassify (index) {
       this.activeIndex = index;
     },
-    getUserInfo (e) {
+    // 获取用户信息
+    async getUserInfo (e) {
       let _this = this;
       let userInfo = e.mp.detail.userInfo;
-      console.log(e)
       if (!userInfo) {
         return
       }
       this.user.nickName = userInfo.nickName
       this.user.pic = userInfo.avatarUrl
-      // 取的用户openid
-      wx.login({
-        success: function (res) {
-          if (res.code) {
-            _this.$_POST(_this.$_url.login, { code: res.code, type: 'wxapp' }).then(response => {
-              let res = response.data;
-              wx.setStorage({
-                key: 'skey',
-                data: res.skey
+      this.wx_login().then(res => {
+        this.postUserInfo(userInfo)
+      })
+
+    },
+    // 微信登录接口
+    wx_login () {
+      return new Promise((resolve, reject) => {
+        // 取的用户openid
+        let _this = this;
+        wx.login({
+          success: function (res) {
+            if (res.code) {
+              _this.$_POST(_this.$_url.login, { code: res.code, type: 'wxapp' }).then(res => {
+                wx.setStorage({
+                  key: 'LoginSessionKey',
+                  data: res.skey
+                })
+                resolve()
               })
-            })
-          } else {
-            console.log(res.errMsg)
+
+            } else {
+              reject(res.errMsg)
+              console.log(res.errMsg)
+            }
           }
-        }
+        })
+      })
+
+
+    },
+    // 将用户基本信息传至服务器，保存在数据库中
+    postUserInfo (userInfo) {
+      this.$_POST(this.$_url.setUserInfo, {
+        userInfo: userInfo
+      }).then(res => {
+        console.log('success')
+      }).catch(err => {
+        console.log(err)
       })
     }
   },

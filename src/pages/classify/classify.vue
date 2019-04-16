@@ -27,7 +27,7 @@
         </p>
       </li>
     </ul>
-    
+
   </div>
 </template>
 
@@ -61,40 +61,40 @@ export default {
         {
           id: 1,
           text: '户外',
-          pic: require('../../../static/images/categoryIcon/icon-travel.png'),
+          pic: 'http://localhost:3000/images/categoryIcon/icon-travel.png'
 
         },
         {
           id: 2,
           text: '游戏',
-          pic: require('../../../static/images/categoryIcon/icon-game.png'),
+          pic: 'http://localhost:3000/images/categoryIcon/icon-game.png'
         },
         {
           id: 3,
           text: '摄影',
-          pic: require('../../../static/images/categoryIcon/icon-camera.png'),
+          pic: 'http://localhost:3000/images/categoryIcon/icon-camera.png'
         },
         {
           id: 4,
           text: '读书',
-          pic: require('../../../static/images/categoryIcon/icon-reading.png'),
+          pic: 'http://localhost:3000/images/categoryIcon/icon-reading.png'
         },
         {
           id: 5,
           text: '电影',
-          pic: require('../../../static/images/categoryIcon/icon-video.png'),
+          pic: 'http://localhost:3000/images/categoryIcon/icon-video.png'
         },
         {
           id: 6,
           text: '工作',
-          pic: require('../../../static/images/categoryIcon/icon-work.png'),
+          pic: 'http://localhost:3000/images/categoryIcon/icon-work.png'
         },
       ]
     }
   },
   methods: {
     // 栏目点击跳转详情页
-    handleClassify (item) {      
+    handleClassify (item) {
       wx.navigateTo({
         url: `/pages/classifyDetail/main?id=${item.id}&name=${item.text}`
       })

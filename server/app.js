@@ -13,33 +13,37 @@ const article = require('./API/article');
 const user = require('./API/user')
 const session = require('koa-session');
 const port = 3000;
+const store = require('./session_store/index')
+// 引入 MongoDB 相关文件
 let {
   connect,
   initSchemas
 } = require("./database/init");
+// 设置静态资源访问路径
 const staticPath = './public'
 app.use(static(path.join(__dirname, staticPath)))
+// 解析 body 请求体
 app.use(bodyParser())
+// koa session
 app.keys = ['some secret hurr'];
-const CONFIG = {
-  key: 'koa:sess', //cookie key (default is koa:sess)
-  maxAge: 86400000, // cookie的过期时间 maxAge in ms (default is 1 days)
-  overwrite: true, //是否可以overwrite    (默认default true)
-  httpOnly: true, //cookie是否只有服务器端可以访问 httpOnly or not (default true)
-  signed: true, //签名默认true
-  rolling: false, //在每次请求时强行设置cookie，这将重置cookie过期时间（默认：false）
-  renew: false, //(boolean) renew session when session is nearly expired,
+// const CONFIG = {
+//   key: 'koa:sess', //cookie key (default is koa:sess)
+//   maxAge: 86400000, // cookie的过期时间 maxAge in ms (default is 1 days)
+//   overwrite: true, //是否可以overwrite    (默认default true)
+//   httpOnly: true, //cookie是否只有服务器端可以访问 httpOnly or not (default true)
+//   signed: true, //签名默认true
+//   rolling: false, //在每次请求时强行设置cookie，这将重置cookie过期时间（默认：false）
+//   renew: false, //(boolean) renew session when session is nearly expired,
 
-};
-app.use(session(CONFIG, app));
+// };
+
+app.use(session({
+  store
+}, app));
 // router.get('/', async (ctx, next) => {
 // ctx.set('Access-Control-Allow-Origin', '*')
 // })
-app.use(async (ctx, next) => {
-  let userSession = ctx.session.openId
-  console.log(userSession,'userSession')
-  await next()
-})
+
 // 使用路由
 router.use('/article', article.routes());
 router.use('/user', user.routes())
